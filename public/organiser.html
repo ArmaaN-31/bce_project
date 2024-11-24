@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Organiser Profile</title>
+      <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/djgzc9eeh/image/upload/v1731764961/profile_ftcqsj.png" />
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .card:hover{
+            scale: 1.05;
+            transition: 0.3s;
+            animation: ease-in-out;
+
+        }
+    </style>
+    
+          <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+      <script>
+        $(document).ready(function(){
+          $("#activeuser").html(localStorage.getItem("activeuser"))
+          $("#update").click(function(){
+            let email=$("#txtEmail").val()
+            let curpass=$("#txtPass").val()
+            let newpass=$("#txtNewPass").val()
+            let obj1={
+              type:"get",
+              url:"/update-pass",
+              data:{
+                txtEmail:email,
+                txtPass:curpass,
+                txtNewPass:newpass
+              }
+            }
+            $.ajax(obj1).done(function(response){
+              alert(response)
+            }).fail(function(err){
+              alert("Server Error")
+            })
+            
+          })
+          $("#logout").click(function(){
+            localStorage.clear()
+            location.href="index.html"
+          })
+          if(localStorage==null){
+            location.href="index.html"
+          }
+        })
+        </script>
+</head>
+
+  <body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Organiser's Page</a>
+          <div class="d-flex" >
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+          
+          Welcome :<span id="activeuser"></span>
+        </div>
+      </div>
+    <div class="container " style="display: flex; justify-content: space-evenly ;margin-top: 100px; gap: 60px;">
+        <div class="card" style="width: 18rem;">
+            <img src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1731764961/profile_ftcqsj.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Profile</h5>
+              <p class="card-text">Tell us about yourself</p>
+              <a href="profileorganiser.html" class="btn btn-success">Profile</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1731765046/tournament_dki6c6.png"class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Publish</h5>
+              <p class="card-text">Set up tournaments</p>
+              <a href="publish.html" class="btn btn-success">Publish</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1731765120/setting_ifxuv4.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Settings</h5>
+              <p class="card-text">Want to change somthing?</p>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdropSettings">
+                Settings
+              </button>
+            </div>
+        </div>
+
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1731765199/logout_e8khaj.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Log Out</h5>
+              <p class="card-text">We'll be waiting</p>
+              <button class="btn btn-success" id="logout">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="staticBackdropSettings" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Email ID <br>
+            <div class="col">
+              <input type="text" class="form-control" id="txtEmail" placeholder="Email" aria-label="First name">
+            </div>
+            <br>
+            Current Password: <br>
+            <input type="text" class="form-control" id="txtPass" placeholder="Current Pass" aria-label="First name">
+            <br>
+            New Password : <br>
+            <input type="text" class="form-control" id="txtNewPass" placeholder="New Pass" aria-label="First name">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="update">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

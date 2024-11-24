@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+      .car{
+        height: 1000px;
+        width: 800px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      /* .cards{
+        
+        
+      } */
+    </style>
+    <script>
+      var module = angular.module("kuchModule", []);
+      var controller = module.controller("kuchController", function ($scope,$http) 
+      {
+       $scope.fn = "arman";
+       $scope.dohello= function() 
+       {
+        alert("Hello "+ $scope.fn)
+       }
+       $scope.join= function()
+       {
+        $scope.full=$scope.fn + " " + $scope.ln
+       }
+       $scope.months=["Jan","feb","March","Apr"];
+       $scope.month="none"
+       $scope.doMonth = function(){
+        alert($scope.month)
+       }
+       
+       $scope.doFetchAll=function(){
+        let url="/fetchall"
+        $http.get(url).then(done,fail);
+        function done(response){
+          alert(JSON.stringify(response.data))
+          $scope.jsonArray=response.data
+        }
+        function fail(err)
+        {
+          alert(err.data)
+        }
+      }
+       
+
+      //  $scope.jsonArray=[
+      //       {
+      //           emailid:"bce@gmail.com",pwd:"122",picpath:"fb.png",city:"BTI"
+      //       },
+      //       {
+      //           emailid:"sst@gmail.com",pwd:"33",picpath:"modisaab.jpg",city:"Delhi"
+      //       },
+      //       {
+      //           emailid:"real@gmail.com",pwd:"122",picpath:"fb.png",city:"Chandigarh"
+      //       },
+      //       {
+      //           emailid:"java@gmail.com",pwd:"122",picpath:"modisaab.jpg",city:"Bombay"
+      //       },
+      //       {
+      //           emailid:"bce@gmail.com",pwd:"122",picpath:"fb.png",city:"Bombay"
+      //       },
+      //       {
+      //           emailid:"sst@gmail.com",pwd:"33",picpath:"modisaab.jpg",city:"Pune"
+      //       },
+      //       {
+      //           emailid:"real@gmail.com",pwd:"122",picpath:"me2.png",city:"Bombay"
+      //       },
+      //       {
+      //           emailid:"java@gmail.com",pwd:"122",picpath:"modisaab.jpg",city:"Delhi"
+      //       }
+      //    ]
+      });
+    </script>
+  </head>
+  <!-- View -->
+  <body ng-app="kuchModule" ng-controller="kuchController">
+    <center>
+    <input type="button" value="Hello" ng-click="dohello();" />
+    <input type="button"value="join" ng-click="join()">
+    <p>First Name <input type="text" ng-model="fn" /></p>
+    <p>Last Name <input type="text"ng-model="ln" name="" id=""></p>
+    {{fn}} <br>
+    {{full}}
+    <br><br><br> <hr> <br><br><br>
+    <select name="" id="" ng-change="doMonth()" ng-model="month">
+      <option value="" >Select</option>
+      <option value="" ng-repeat="month in months">{{month}}</option>
+    </select>
+    <table width="600" border="1" rules="all">
+      <th>Mail</th><th>Password</th><th>Type</th><th>Status</th>
+      <tr ng-repeat="box in jsonArray">
+        <td>{{box.emailid}}</td>
+        <td>{{box.pwd}}</td>
+        <td>{{box.utype}}</td>
+        <td>{{box.status}}</td>
+      </tr>
+    </table>
+    <button value="fetchall" ng-click="doFetchAll()">Fetch ALL</button>
+      
+    <div class="car">
+    <div class="cards" ng-repeat="a in jsonArray">
+
+      <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{a.emailid}}</li>
+          <li class="list-group-item">{{a.pwd}}</li>
+          <li class="list-group-item">{{a.utype}}</li>
+        </ul>
+        
+      </div>
+
+    </div>
+    </div>
+    </center>
+  </body>
+</html>

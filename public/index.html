@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <style>
+       header{
+        height: 90vh;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0px;
+        background-color: rgb(grey);
+       } 
+       
+       
+       body{
+        background-color: #CCCCCC;
+       }
+       .gg{
+        height: 70vh;
+        border-radius: 30px;
+        
+       }
+       #carouselExample{
+        border-radius: 30px;
+        box-shadow: 4px 4px 50px 2px #FF6600;
+       }
+       .bodynav{
+        height: 10vh;
+        background-color: #FF6600;
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        align-items: center;
+        color: white;
+        font-size: 50px;
+        margin-left: 50%;
+        transform: translate(-50%);
+        border-radius: 30px;
+       }
+       main{
+        display: flex;
+        flex-direction: column;
+       }
+       .service{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 40px;
+       }
+       .card-body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+       }
+       .profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 370px;
+  width: 100%;
+  background: #fff;
+  border-radius: 24px;
+  padding: 25px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.profile-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 36%;
+  width: 100%;
+  border-radius: 24px 24px 0 0;
+  background-color: #d3d3d3;
+}
+.image {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #ff6600;
+  padding: 3px;
+  margin-bottom: 10px;
+}
+.image .profile-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+.profile-card .text-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+}
+.text-data .name {
+  font-size: 22px;
+  font-weight: 500;
+}
+.text-data .job {
+  font-size: 15px;
+  font-weight: 400;
+}
+.profile-card .media-buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+.media-buttons .link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  margin: 0 8px;
+  background-color: #4070f4;
+  text-decoration: none;
+}
+.profile-card .buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+.buttons .button {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  border-radius: 24px;
+  margin: 0 10px;
+  padding: 8px 24px;
+  background-color: #4070f4;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.buttons .button:hover {
+  background-color: #0e4bf1;
+}
+.profile-card .analytics {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.data i {
+  font-size: 18px;
+  margin-right: 6px;
+}
+.data:last-child {
+  border-right: none;
+}
+.row1{
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.end{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+.map{
+  display: flex;
+  justify-content: center;
+
+
+}
+iframe{
+  border-radius: 30px;
+}
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script>
+      $(document).ready(function(){
+       $("#signupbtn").click(function(){
+        alert("HEllo")
+          let email=$("#txtEmail").val();
+          let pwd=$("#txtPwd").val();
+          let type=$("#utype").val();
+          let obj={
+            type:"get",
+            url:"/signup",
+            data:{
+              txtEmail:email,
+              txtPwd:pwd,
+              utype:type
+            }
+          }
+          $.ajax(obj).done(function(response){
+            alert(response);
+          }).fail(function(err){
+            alert("server error");
+          })
+        })
+        $("#loginbtn").click(function(){
+          let email=$("#txtlogid").val();
+          let pwd=$("#txtLogPass").val();
+          let obj={
+            type:"get",
+            url:"/login",
+            data:{
+              txtLogid:email,
+              txtLogPass:pwd,
+            }
+          }
+          $.ajax(obj).done(function(response,err){
+            alert(response)
+            resp=response
+            if (resp=="host")
+          {
+            location.href="organiser.html"
+            localStorage.setItem("activeuser",email)
+          }
+          else if (resp=="player")
+          {
+            location.href="player.html"
+            localStorage.setItem("activeuser",email)
+          }
+          })
+        })
+      
+      
+      
+      })
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#ourservice">Service</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#ourteam">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#findus">Find Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <div>
+            <!-- nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+          </div>
+          <button type="button" class="btn btn-warning d-flex" data-bs-toggle="modal" data-bs-target="#SignUpModal">
+            Sign Up
+          </button>
+          &nbsp;
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LoginModal">
+            Log In
+          </button>
+        </div>
+      </div>
+    </nav>
+    
+    <header style="background-color: #F8F8FF;">
+      <div class="containcour" style="display: flex;justify-content: center;justify-content: space-evenly; width: 100%;align-items: center;">
+        <div style="font-size: 40px;width: 10%;">
+          
+        </div>
+      <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img  class="gg" src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1731775943/FINALPHOTO2_yqrnbz.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img class="gg" src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1731775945/FINALPHOTO3_ouleui.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img class="gg" src="..." class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+        <div style="font-size: 40px;width: 10%;">
+          
+        </div>
+    </div>
+      <span>
+        BAc
+      </span>
+    </header>
+    
+    <main>
+      <div id="ourservice" class="bodynav" >
+        OUR SERVICES
+      </div>
+      <div class="service">
+        <div class="card" style="width: 20rem;">
+          <img style="padding: 5px;" src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1732127301/tournament_1_z2pvzd.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Publish Tournaments</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div  class="card" style="width: 20rem;">
+          <img style="padding: 5px;" src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1732127328/calendar_pap4h5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Upcoming Events</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+          <img style="padding: 5px;" src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1732127244/trophy_uvrung.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Win Prizes</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+          <img style="padding: 5px;" src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1732127276/certificate_tbnmxr.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Certification</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </main>
+<br><br>
+<br><br>
+    <footer style="background-color: #F8F8FF; padding-bottom: 90px;" >
+      <div id="ourteam" class="bodynav" >OUR TEAM</div>
+
+
+      <div class="container">
+        <div class="row1">
+      <div class="profile-card">
+        <div class="image">
+          <img src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1732166533/wlzrqtewonehipayukds.jpg" alt="" class="profile-img" />
+        </div>
+        <div class="text-data">
+          <span class="name" style="font-size: 28px;">Armaan Singh</span>
+          <span class="job"style="font-size: 22px;" >Developer</span>
+        </div>
+        
+        <div class="buttons">
+          <button class="button " style="background-color: orange;">About</button>
+          <button class="button" style="background-color: orange;">Contact</button>
+        </div>
+        
+      </div>
+
+
+      <div class="profile-card">
+        <div class="image">
+          <img src="https://res.cloudinary.com/djgzc9eeh/image/upload/v1732166690/Screenshot_2024-11-21_105428_rlcxrg.png" alt="" class="profile-img" />
+        </div>
+        <div class="text-data">
+          <span class="name " style="font-size: 28px;">Rajesh Bansal</span>
+          <span class="job" style="font-size: 22px;">Guru Ji</span>
+        </div>
+        
+        <div class="buttons">
+          <button class="button" style="background-color: orange;">About</button>
+          <button class="button" style="background-color: orange;">Contact</button>
+        </div>
+        
+      </div>
+        </div>
+      </div>
+    </footer>
+        <br>
+    <div class="end">
+      <div id="findus" class="bodynav" style="width: 80%;border-radius: 30px;height: 10vh;background-color: #FF6600;font-size: 50px;justify-content: center;align-items: center;display: flex;color: white;" >
+        FIND US
+      </div>
+      <br>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d662.3004517200648!2d74.95241917391006!3d30.21214148621989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391732a4f07278a9%3A0x4a0d6293513f98ce!2sBanglore%20Computer%20Education!5e0!3m2!1sen!2sin!4v1732167569981!5m2!1sen!2sin" width="1300" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      </div>
+    </div>
+    
+    
+      
+      
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="SignUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Sign Up Modal</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label for="txtEmail" class="col-form-label">Email</label>
+
+            <input type="email" id="txtEmail" placeholder="email" class="form-control"><br>
+
+            <label for="txtPwd" class="col-form-label">Password</label>
+
+            <input type="password" name="" id="txtPwd" placeholder="pass" class="form-control"><br>
+
+            <label for="utype" class="col-form-label">User Type</label>
+
+            <select name="" id="utype" class="form-select">
+              <option value="" disabled selected>Select</option>
+              <option value="player">player</option>
+              <option value="host">host</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="signupbtn" class="btn btn-warning">Sign Up</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+            <label for="txtLogid">Email ID</label>
+            <input type="email" id="txtlogid" class="form-control" name="" id=""><br>
+
+            <label for="txtLogPass">Password</label>
+            <input type="password" class="form-control" id="txtLogPass">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="loginbtn" class="btn btn-warning">Login</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+
+
+
+
